@@ -1,0 +1,75 @@
+<script>
+
+// Get swedish words to show
+google.script.run.withSuccessHandler(getSwedishList).getTodaysWordsListSwedish();
+
+// Data
+var modalContentList = new Array();
+
+function getSwedishList(swedishList){
+   modalContentList=swedishList;
+}
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get Content id
+var infinitiv = document.getElementById("inf");
+var imperativ = document.getElementById("imp");
+var presens = document.getElementById("pres");
+var preteritum = document.getElementById("pret");
+var supinum = document.getElementById("sup");
+
+// Get the button that opens the modal
+var btnList = ["myBtn1","myBtn2","myBtn3","myBtn4","myBtn5","myBtn6","myBtn7","myBtn8","myBtn9","myBtn10"];
+btnList.forEach(clickfuntion);
+
+function clickfuntion(item,index){
+    document.getElementById(item).onclick= function(){
+      //modalcontent.innerHTML = modalContentList[index];      
+      infinitiv.innerHTML = modalContentList[index][0];
+      imperativ.innerHTML = modalContentList[index][1];
+      presens.innerHTML = modalContentList[index][2];
+      preteritum.innerHTML = modalContentList[index][3];
+      supinum.innerHTML = modalContentList[index][4];
+      modal.style.display = "block";
+    };
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+// Shuffle function
+ var shuffleWords = document.getElementById("shuffle");
+ shuffleWords.addEventListener("click", setShuffleValue1);
+ var reload = document.getElementById("reload");
+ reload.addEventListener("click",callDoGet);
+ var back = document.getElementById("back");
+ back.addEventListener("click",setShuffleValue0);
+
+function setShuffleValue1(){
+  google.script.run.isShuffleClicked(1);
+}
+
+function callDoGet(){
+  google.script.run.doGet();
+}
+
+function setShuffleValue0(){
+  google.script.run.isShuffleClicked(0);
+}
+ 
+  
+</script>
